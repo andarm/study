@@ -60,12 +60,86 @@ set encoding=prc
 syntax on  
 "autocmd InsertLeave
 filetype plugin on
-set tags=tags  
 "let Tlist_Auto_Open=1
 autocmd InsertEnter * se cul
 set showcmd
 set autoindent
 set completeopt=longest,menu
-set nocompatible
-set backspace=indent,eol,start
+"map llo :TlistOpen<CR>
+"map llc :TlistClose<CR>
+colo desert
+"map <F5> I# <ESC>
+"map =  ^i//<esc>
+"for omni
+"set nocp  
+"#########################
+"set cscopequickfix=s-,c-,d-,i-,t-,e-
+"nmap s :cs find s =expand("")
+"nmap g :cs find g =expand("")
+"nmap c :cs find c =expand("")
+"nmap t :cs find t =expand("")
+"nmap e :cs find e =expand("")
+"nmap f :cs find f =expand("")
+"nmap i :cs find i ^=expand("")$
+"nmap d :cs find d =expand("")
 
+set autoindent "开启自动缩进
+set shiftwidth=4 "自动缩进4个空格
+set softtabstop=4 "suo
+
+
+set tags=tags;
+set autochdir
+set nocompatible              " required
+filetype off                  " required
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'gmarik/Vundle.vim'
+Plugin 'linuxsty.vim'
+Plugin 'ctags.vim'
+Plugin 'vim-snipmate'
+Plugin 'inccomplete'
+Plugin 'Valloric/YouCompleteMe'
+
+call vundle#end()            " required
+filetype plugin indent on    " required
+set nu
+set hlsearch  
+set mouse=a
+imap <F5> :<ESC>:wa<CR>:call Do_OneFileCompile()<CR>
+
+function Do_OneFileCompile()
+    if expand("%:p:h") != getcwd()
+	echohl WarningMsg | echo "Fail to compile, no such file in current directory!"
+	| echohl none
+	exit -1
+    endif
+    let sourcefile_name = expand("%:t")
+    if (sourcefile_name == "" || (&filetype != "c" && &filetype != "cpp"))
+	echohl WarningMsg | echo "It's not a \"c\" or \"cpp\" file!"
+	| echohl none
+	exit -2
+    endif
+    let sourcefile_name = expand("%:r")
+
+    if &filetype == "c"
+	execute "!gcc\ -g\ -o\ " . sourcefile_name . "\ %"
+    elseif &filetype == "cpp"
+	execute "!g++\ -g\ -o\ " . sourcefile_name . "\ %"
+    endif
+    let exec_filename = expand("%:p:h") . '/' . expand("%:r")
+    echo exec_filename
+    execute "!chmod +x " . exec_filename
+    execute "!gnome-terminal -e ' " . exec_filename . "'"
+endfunction 
+if has("cscope")
+set csprg=/usr/bin/cscope
+set csto=0
+set cst
+set csverb
+set cspc=3
+endif
+
+
+"set tags=tags 
