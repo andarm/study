@@ -1,0 +1,1 @@
+cmd_/home/saftop/rt/drv/ai2/ti_adc_driver.ko := arm-none-linux-gnueabi-ld -EL -r  -T /home/saftop/rt/linux-3.2/scripts/module-common.lds --build-id  -o /home/saftop/rt/drv/ai2/ti_adc_driver.ko /home/saftop/rt/drv/ai2/ti_adc_driver.o /home/saftop/rt/drv/ai2/ti_adc_driver.mod.o

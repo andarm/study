@@ -1,0 +1,1 @@
+cmd_/home/saftop/rt/drv/key/key.ko := arm-none-linux-gnueabi-ld -EL -r  -T /home/saftop/rt/linux-3.2/scripts/module-common.lds --build-id  -o /home/saftop/rt/drv/key/key.ko /home/saftop/rt/drv/key/key.o /home/saftop/rt/drv/key/key.mod.o

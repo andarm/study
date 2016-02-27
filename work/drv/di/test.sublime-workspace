@@ -1,0 +1,710 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"ai",
+				"ai_data"
+			],
+			[
+				"ad",
+				"ad_filter"
+			],
+			[
+				"tem",
+				"temp_ai_data"
+			],
+			[
+				"te",
+				"temp0_ai_data"
+			],
+			[
+				"dev_",
+				"dev_data"
+			],
+			[
+				"data",
+				"dev_data"
+			],
+			[
+				"con",
+				"condition"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": ".SUFFIXES: .cpp .o\n.DEFAULT: all\n\nTARGET=Logic_RT.so\nifndef ${CC}\nCC=arm-linux-g++\nendif\n\nifndef ${DEBUG}\nDEBUG=-DNDEBUG\nendif\n\nDLD=-L/usr/local/lib\nLIBS=-lsocketcan -lpthread -lrt -shared\nCFLAGS= -g -Wall -O0 -fPIC\n\nINCLUDE=-I/usr/local/include/ -I../comm/frame -I../comm/sys -I../protocol -I../comm/db -I../comm/thirdparty -I../comm/thirdparty/rapidjson -I../comm/thirdparty/rapidjson/internal\n\nSRC=../comm/sys/thread.cpp \\\n	../comm/sys/delegate.cpp \\\n	../comm/sys/iniaccess.cpp \\\n	../comm/sys/log.cpp \\\n	../comm/sys/crc.cpp \\\n	../comm/sys/plex.cpp \\\n	../comm/sys/logicmsgmng.cpp \\\n	../comm/frame/timerhelper.cpp \\\n	./HTSrv.cpp \\\n\nOBJS=${SRC:.cpp=.o}\n\n\n${TARGET}:${OBJS}\n	${CC} ${DEBUG} ${OBJS} $(DLD) -o ${TARGET} ${LIBS}\n	@echo ${TARGET} \"build success\"\n.cpp.o:\n	${CC} ${DEBUG} ${INCLUDE} -c $< ${CFLAGS} -o $@\n	\n.PHONY:clean\nclean:\n	@rm ${TARGET} ${OBJS}\n	@echo ${TARGET} \" clean success\"\n\n\n",
+			"file": "/E/pro/yijiangbo/arm9/Logic_RT/Makefile",
+			"file_size": 895,
+			"file_write_time": 130613597691943301,
+			"settings":
+			{
+				"buffer_size": 896,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "//192.168.182.128/share/saftop/rt/drv/ai2/ti_adc_driver.c",
+			"settings":
+			{
+				"buffer_size": 15759,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "//192.168.182.128/share/saftop/rt/drv/ai4/ai4.c",
+			"settings":
+			{
+				"buffer_size": 16320,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "//192.168.182.128/share/saftop/rt/drv/ai4/ai.h",
+			"settings":
+			{
+				"buffer_size": 6227,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "//192.168.182.128/share/saftop/rt/drv/drv_wdg/wdg.h",
+			"settings":
+			{
+				"buffer_size": 1422,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "\n/***********************************************************************************  \n *       Copyright Saftop Technologies Co., Ltd. 1998-2015. All rights reserved.   \n *       File name:     di.c\n *       Author:        linjinye \n *       Version:       \n *       Date:          2015-10-12\n *       Dicription:    干接点输入驱动\n *       History:\n *                                                        \n *****************************************************************************/\n#include <linux/init.h>\n#include <linux/module.h>\n#include <linux/kernel.h>\n#include <linux/types.h>\n#include <linux/fs.h>\n#include <linux/slab.h>\n#include <linux/cdev.h>\n#include <linux/device.h>\n#include <linux/semaphore.h>\n#include <linux/sched.h>\n#include <linux/workqueue.h>\n#include <linux/gpio.h>\n\n#include <asm/io.h>\n#include <asm/uaccess.h>\n#include <asm/delay.h>\n\n#include \"di.h\"\n\n#define GPIO_TO_PIN(bank, gpio) (32 * (bank) + (gpio))\n\n/* am335x的GPIO接口 */\nextern int  gpio_request(unsigned gpio,const char *tag);\nextern int  gpio_direction_input(unsigned gpio);\nextern int  gpio_direction_output(unsigned gpio, int value);\nextern int  gpio_get_value(unsigned gpio);\nextern void gpio_set_value(unsigned gpio, int value);\nextern int  gpio_cansleep(unsigned gpio);\n\n\n#define	DI_MAJOR	0	// 定义主设备号 0--自动分配 非零手动分配\n#define	DI_MINOR	0	// 定义次设备号 一般由0开始\n\n#define DI_CH		3\n\n#define GPIO_DI_0		GPIO_TO_PIN(1, 17)\n#define GPIO_DI_1		GPIO_TO_PIN(1, 18)\n#define GPIO_DI_2		GPIO_TO_PIN(1, 19)\n\nu32 GPIO_DI[ ] = {\n	GPIO_DI_0,\n	GPIO_DI_1,\n	GPIO_DI_2\n};\n\ntypedef struct\n{\n	struct cdev cdev;		// 字符设备结构体\n	struct class *cls;\n	struct device *dev;\n	struct rw_semaphore rw_sem;\n	struct timer_list timer;\n	struct work_struct di_work;\n	u16 di_data[DI_CH];\n	u16 di_bak_data[DI_CH];\n	u32 di_count[DI_CH];\n} ST_DI_DRV, *LPST_DI_DRV;\n\nstatic int di_open(struct inode *inode, struct file *filp);\nstatic int di_release(struct inode *inode, struct file *filp);\nstatic ssize_t di_read(struct file *filp, char __user *buf, size_t size, loff_t *ppos);\n\nstatic int di_major 			= DI_MAJOR;\nstatic int di_minor 			= DI_MINOR;\nstatic int di_nr_devs			= 1;			// 字符设备的个数\nstatic const char di_dev_name[] 	= \"am335x_di\";	// 注册的名称\n\nST_DI_DRV *pst_di_drv = NULL;\n\n//文件操作结构体\nstatic const struct file_operations di_fops = \n{\n	.owner 		= THIS_MODULE,\n	.read 		= di_read,\n	.open 		= di_open,\n	.release 	= di_release,\n};\n\nstatic inline u16 to_real_di_val(u32 ch)\n{\n	if (ch >= 0 && ch < DI_CH)\n	{\n		if (gpio_get_value(GPIO_DI[ch]))\n		{\n			return 500;\n		}\n		else\n		{\n			return 0;\n		}\n	}\n	else\n	{// 超出范围 返回高电平\n		return 500;\n	}\n}\n\nstatic void di_work_handler(struct work_struct *work)\n{\n	int i;\n	LPST_DI_DRV pdi_drv = container_of(work, ST_DI_DRV, di_work);\n	\n	for (i = 0; i < DI_CH; i++)\n	{\n		pdi_drv->di_bak_data[i] = to_real_di_val(i);\n		\n		// 获取读锁\n		down_read(&pdi_drv->rw_sem);\n		if (pdi_drv->di_bak_data[i] != pdi_drv->di_data[i])\n		{\n			up_read(&pdi_drv->rw_sem);\n			if (pdi_drv->di_count[i])\n			{\n				pdi_drv->di_count[i] -= 1;\n				if (pdi_drv->di_count[i] == 0)\n				{// 更新di_data\n					down_write(&pdi_drv->rw_sem);\n					pdi_drv->di_data[i] = pdi_drv->di_bak_data[i];\n					up_write(&pdi_drv->rw_sem);\n					pdi_drv->di_count[i] = 10;\n				}\n			}\n		}\n		else\n		{\n			up_read(&pdi_drv->rw_sem);\n			pdi_drv->di_count[i] = 10;\n		}\n	}\n}\n\nstatic void timer_handler(unsigned long data)\n{\n	LPST_DI_DRV pdi_drv = (LPST_DI_DRV)data;\n	\n	schedule_work(&pdi_drv->di_work);\n	mod_timer(&pdi_drv->timer, jiffies + (10 * HZ / 1000));\n}\n\nstatic inline void di_setup_pin(void)\n{// 3路DI输入\n	gpio_request(GPIO_DI_0,NULL);\n	gpio_request(GPIO_DI_1,NULL);\n	gpio_request(GPIO_DI_2,NULL);\n	gpio_direction_input(GPIO_DI_0);\n	gpio_direction_input(GPIO_DI_1);\n	gpio_direction_input(GPIO_DI_2);\n}\n\nstatic int di_open(struct inode *inode, struct file *filp)\n{\n	return 0;\n}\n\nstatic int di_release(struct inode *inode, struct file *filp)\n{\n	return 0;\n}\n\nstatic ssize_t di_read(struct file *filp, char __user *buf, size_t size, loff_t *ppos)\n{\n	if (size != DI_CH*sizeof(u16))\n	{\n		printk(\"size error %d\\n\",size);\n		return -EINVAL;\n	}\n	\n	down_read(&pst_di_drv->rw_sem);\n	if (copy_to_user(buf, pst_di_drv->di_data, DI_CH*sizeof(u16)))\n	{\n		up_read(&pst_di_drv->rw_sem);\n		return -EBUSY;\n	}\n	else\n	{\n		up_read(&pst_di_drv->rw_sem);\n		return (DI_CH*sizeof(u16));\n	}\n}\n\nstatic int __init di_init(void)\n{\n	int err;\n	int i;\n	dev_t devno = MKDEV(di_major, 0);\n	\n	/***********************申请字符设备************************/\n	if (di_major)\n	{// 手动申请\n		err = register_chrdev_region(devno, di_nr_devs, di_dev_name);\n	}\n	else\n	{// 内核自动申请\n		err = alloc_chrdev_region(&devno, di_minor, di_nr_devs, di_dev_name);\n		di_major = MAJOR(devno);\n	}\n\n	if (err < 0)\n	{\n		printk(\"am335x_di can't get the major %d\\n\", di_major);\n		return err;\n	}\n	else\n	{\n		printk(KERN_DEBUG \"am335x_di success get the major is %d\\n\", di_major);\n	}\n	\n	/**************注册字符设备的具体方法**********************/\n	pst_di_drv = kmalloc(sizeof(ST_DI_DRV), GFP_KERNEL);\n	if (pst_di_drv == NULL)\n	{\n		err = -ENOMEM;\n		//goto fail_malloc;\n	}\n 	\n	memset(pst_di_drv, 0, sizeof(ST_DI_DRV));\n	cdev_init(&pst_di_drv->cdev, &di_fops);	// 与文件操作函数关联起来\n	pst_di_drv->cdev.owner	= THIS_MODULE;\n	init_rwsem(&pst_di_drv->rw_sem);\n	INIT_WORK(&pst_di_drv->di_work, di_work_handler);\n	init_timer(&pst_di_drv->timer);\n\n	// add 后所有方法生效 在此之前进一步设置硬件\n	di_setup_pin();\n\n	for (i = 0; i < DI_CH; i++)\n	{// 生效前先读入原始值\n		pst_di_drv->di_data[i]		= to_real_di_val(i);\n		pst_di_drv->di_bak_data[i]	= to_real_di_val(i);\n		pst_di_drv->di_count[i]		= 10;\n	}\n	err = cdev_add(&pst_di_drv->cdev, devno, 1);\n	\n	if (err < 0)\n	{\n		printk(\"cdev_add fail\\n\");\n		goto fail_cdev_add;\n	}\n	\n	// 为proc文件系统 创建一个设备类\n	pst_di_drv->cls = class_create(THIS_MODULE, di_dev_name);\n	\n	// 为该类 创建一个设备\n	pst_di_drv->dev = device_create(pst_di_drv->cls, NULL, MKDEV(di_major, 0), NULL,\"%s\", \"di_dev\");\n	pst_di_drv->timer.function	= timer_handler;\n	pst_di_drv->timer.data		= (unsigned long)pst_di_drv;\n	pst_di_drv->timer.expires	= jiffies + (8 * HZ / 1000);	// 8ms为单位\n	add_timer(&pst_di_drv->timer);\n\n	return 0;\n\nfail_cdev_add:\n	kfree(pst_di_drv);\nfail_malloc:\n	unregister_chrdev_region(MKDEV(di_major, di_minor),\n							di_nr_devs);\n	return err;\n}\n\nstatic void __exit di_exit(void)\n{\n	del_timer(&pst_di_drv->timer);\n	\n	\n	cdev_del(&pst_di_drv->cdev);\n	unregister_chrdev_region(MKDEV(di_major, di_minor),\n							di_nr_devs);\n	device_destroy(pst_di_drv->cls, MKDEV(di_major, 0));\n	class_destroy(pst_di_drv->cls);\n	\n	kfree(pst_di_drv);\n	printk(KERN_DEBUG \"am335x_di exit...\\n\");\n}\n\nmodule_init(di_init);\nmodule_exit(di_exit);\nMODULE_LICENSE(\"GPL\");\n",
+			"file": "di.c",
+			"file_size": 6986,
+			"file_write_time": 130889506624486490,
+			"settings":
+			{
+				"buffer_size": 6531,
+				"line_ending": "Windows",
+				"scratch": true
+			}
+		},
+		{
+			"contents": "Package Control Messages\n========================\n\nBetterFindBuffer\n----------------\n\n  Thank you for installing BetterFindBuffer.\n  \n  You need to *restart* your SublimeText for this plugin to work.\n",
+			"settings":
+			{
+				"buffer_size": 200,
+				"line_ending": "Windows",
+				"name": "Package Control Messages",
+				"read_only": true,
+				"scratch": true
+			}
+		},
+		{
+			"file": "/D/Program Files/Sublime Text3/Data/Packages/User/CTags.sublime-settings",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/E/pro/yijiangbo/arm9/Logic_RT_/mainframe.ini",
+			"settings":
+			{
+				"buffer_size": 265,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"ctags",
+				"Code Folding: Fold Tag Attributes→折叠标签属性"
+			],
+			[
+				"",
+				"Convert Case: Lower Case→小写模式"
+			],
+			[
+				"Package Control: in",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 504.0
+	},
+	"console":
+	{
+		"height": 153.0,
+		"history":
+		[
+			"import urllib2,os; pf='Package Control.sublime-package'; ipp=sublime.installed_packages_path(); os.makedirs(ipp) if not os.path.exists(ipp) else None; urllib2.install_opener(urllib2.build_opener(urllib2.ProxyHandler())); open(os.path.join(ipp,pf),'wb').write(urllib2.urlopen('http://sublime.wbond.net/'+pf.replace(' ','%20')).read()); print('Please restart Sublime Text to finish installation')",
+			":30",
+			"import urllib.request,os; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), 'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ','%20')).read())"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"//192.168.182.128/share/saftop/rt/drv/ai4/ai4.c",
+		"//192.168.182.128/share/saftop/rt/drv/di/test.sublime-project",
+		"//192.168.182.128/share/saftop/rt/drv/di/test.sublime-workspace",
+		"//192.168.182.128/share/saftop/rt/drv/ai4/Makefile",
+		"/D/Program Files/Sublime Text3/Data/Packages/CTags/CTags.sublime-settings",
+		"//192.168.182.128/share/saftop/rt/drv/ai3/ai.h",
+		"//192.168.182.128/share/saftop/rt/drv/ai/ti_adc_driver.c",
+		"//192.168.182.128/share/saftop/rt/drv/ai3/ai3.c",
+		"//192.168.182.128/share/saftop/rt/drv/ai3/Makefile",
+		"//192.168.182.128/share/saftop/rt/drv/ai/ti_adc_driver.mod.c",
+		"//192.168.20.36/share/saftop/rt/drv/drv_wdg/wdg.c",
+		"//192.168.20.36/share/saftop/rt/drv/wdg/wdg.c",
+		"//192.168.20.36/share/saftop/rt/drv/drv_wdg/Makefile",
+		"/E/tftp/file/arm板恢复出厂设置说明.txt",
+		"//192.168.20.36/share/saftop/rt/drv/drv_wdg/wdg.h",
+		"//192.168.20.36/share/saftop/rt/drv/key/key.c",
+		"//192.168.20.36/share/saftop/rt/drv/key/key.h",
+		"//192.168.20.36/share/saftop/rt/drv/wdg/wdg.h",
+		"//192.168.20.36/share/saftop/rt/drv/do/do.c",
+		"//192.168.20.36/share/saftop/rt/drv/do/do.h",
+		"/D/Logic_IP_Config/mainframe.ini",
+		"/D/Logic_IP_Config/IPConfig.h",
+		"/D/Logic_IP_Config/Makefile",
+		"/D/Logic_HT_Dial/HTDial.cpp",
+		"/E/liujia/Logic_HT_Dial/ht_def.ini",
+		"/D/saftop_ipcfg.sh",
+		"/D/saftop_init.sh",
+		"/D/Logic_IP_Config/IPConfig.cpp",
+		"//192.168.20.36/share/saftop/rt/rt_app/Logic_RT_Dial/RTDial.cpp",
+		"//192.168.20.36/share/saftop/rt/rt_app/Logic_RT_Dial/RTDial.h",
+		"/E/pro/yijiangbo/arm9/Logic_RT/mainframe.ini",
+		"/E/pro/yijiangbo/arm9/Logic_RT_/gpio-keys.pro",
+		"/D/Logic_HT_Dial/HTDial.h",
+		"/E/pro/yijiangbo/arm9/Logic_RT_/mainframe.ini",
+		"//192.168.20.36/share/saftop/rt/drv/ai/test_ai.c",
+		"//192.168.20.36/share/saftop/rt/drv/key/test_key.c",
+		"//192.168.20.36/share/saftop/rt/drv/di/di.c",
+		"/E/pro/yijiangbo/arm9/Logic_RT_/test_key.c",
+		"//192.168.20.43/share/saftop/rt/rt_app/Logic_RT_Dial/test_key.c",
+		"//192.168.20.43/share/saftop/rt/rt_app/Logic_RT_Dial/RTDial.cpp",
+		"//192.168.20.43/share/saftop/rt/drv/di/di.c",
+		"//192.168.20.43/share/saftop/rt/drv/key/key.c",
+		"/D/Program Files/Sublime Text3/bbb/b.h",
+		"/D/Program Files/Sublime Text3/bbb/a.h",
+		"/D/Program Files/Sublime Text3/bbb/b.c",
+		"/D/Program Files/Sublime Text3/bbb/a.c",
+		"/E/liujia/Logic_HT_Dial/HTDial.cpp",
+		"/E/liujia/Logic_HT_Dial/HTDial.h",
+		"/D/Program Files/Sublime Text3/bbb/saftop_rt.sh",
+		"/D/Program Files/Sublime Text3/Data/Packages/User/Preferences.sublime-settings",
+		"/D/Program Files/Sublime Text3/bbb/LinkTask.cpp",
+		"/D/Program Files/Sublime Text3/bbb/gathertask.h",
+		"/D/Program Files/Sublime Text3/bbb/TimeAndHoliadyMng.h",
+		"/D/Program Files/Sublime Text3/bbb/SaftopRTSrv.h",
+		"/D/Program Files/Sublime Text3/bbb/SaftopRTSrv.cpp",
+		"/D/Program Files/Sublime Text3/bbb/RTDef.h",
+		"/D/Program Files/Sublime Text3/bbb/midgathertask.h",
+		"/D/Program Files/Sublime Text3/bbb/midgathertask.cpp",
+		"/D/Program Files/Sublime Text3/bbb/TimeAndHoliadyMng.cpp",
+		"/D/Program Files/Sublime Text3/bbb/version.h",
+		"/D/Program Files/Sublime Text3/bbb/LinkTask.h",
+		"/D/Program Files/Sublime Text3/bbb/gathertask.cpp"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"prink",
+			"ad_filter",
+			"ABANDON_NUM",
+			"ad_filter",
+			"filer",
+			"ad_filter",
+			"ch1_val",
+			"ad_filter",
+			"read_ad_val",
+			"ad_filer",
+			"read_ch_val",
+			"temp_ai_data",
+			"read_ch_val",
+			"adc_step_config",
+			"read_ch_val",
+			"channel",
+			"adc_step_config",
+			"ADC channel choose:",
+			"free_irq",
+			"adc_interrupt",
+			"adc_step_config",
+			"ad_setup_reg",
+			"adc_step_config",
+			"irqenable",
+			"adc_step_config",
+			"irq",
+			"irq_handler",
+			"irq_handle",
+			"name",
+			"TSCADC_REG_IRQEOI",
+			"tscadc_readl",
+			"tsadc_readl",
+			"buffer",
+			"adc_interrupt",
+			"ev_adc",
+			"adc_read",
+			"timer_handler",
+			"ad_setup_reg",
+			"TSCADC_STEPCONFIG_INP",
+			"TSCADC_REG_STEPDELAY",
+			"TSCADC_STEPCONFIG_INP",
+			"TSCADC_REG_STEPCONFIG",
+			"TSCADC_STEPCONFIG_SAMPLEDLY",
+			"TSCADC_REG_STEPCONFIG",
+			"ADC_STPENB_STEPENB",
+			"channel",
+			"TSCADC_STEPCONFIG_REFP",
+			"adc_writel",
+			"TSCADC_CNTRLREG_STEPCONFIGWRT",
+			"start_adc",
+			"adc_step_config",
+			"channel",
+			"chanel",
+			"channel",
+			"fops",
+			"adc_st",
+			"ST_DI_DRV",
+			"adc_st",
+			"adc_open",
+			"read",
+			"di_fops",
+			"init",
+			"timer_handler",
+			"DEF_IP",
+			"Server stop finished.",
+			"HTSrv",
+			"ST_LOG",
+			"3333333333333",
+			"Codershowdata\\",
+			" Kias .3333333333333",
+			"CheckRestoreDefaultSetupDial",
+			"gpio_get_value",
+			"do_setup_pin",
+			"am335x_do_exit",
+			"am335x_do_init",
+			"sem",
+			"__init_rwsem",
+			"rw_sem",
+			"am335x_do_exit",
+			"DI_CH",
+			"DO_CH",
+			"DO_MINOR",
+			"DO_MAJOR",
+			"do_write",
+			"do_release",
+			"do_open",
+			"CMD_GET_DIAL8_VALUE",
+			"pirnf",
+			"LoadPlus",
+			"CSaftopRTSrv"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"RTSrv",
+			"DEV_CH",
+			"DEV_MINOR",
+			"DEV_MAJOR",
+			"dev_write",
+			"dev_release",
+			"dev_open"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 5,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/E/pro/yijiangbo/arm9/Logic_RT/Makefile",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 896,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								816,
+								816
+							]
+						],
+						"settings":
+						{
+							"encoding_helper_encoding": "cp936",
+							"origin_encoding": "ASCII",
+							"syntax": "Packages/Makefile/Makefile.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 171.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "//192.168.182.128/share/saftop/rt/drv/ai2/ti_adc_driver.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 15759,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								12570,
+								12570
+							]
+						],
+						"settings":
+						{
+							"encoding_helper_encoding": "UTF-8",
+							"origin_encoding": "ASCII",
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 9202.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "//192.168.182.128/share/saftop/rt/drv/ai4/ai4.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 16320,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								11150,
+								11150
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 7549.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "//192.168.182.128/share/saftop/rt/drv/ai4/ai.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6227,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6227,
+								6227
+							]
+						],
+						"settings":
+						{
+							"encoding_helper_encoding": "cp936",
+							"origin_encoding": "ASCII",
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 2704.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "//192.168.182.128/share/saftop/rt/drv/drv_wdg/wdg.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1422,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1404,
+								1404
+							]
+						],
+						"settings":
+						{
+							"encoding_helper_encoding": "cp936",
+							"origin_encoding": "UTF-8",
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 38.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "di.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6531,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1339,
+								1339
+							]
+						],
+						"settings":
+						{
+							"encoding_helper_encoding": "GB2312",
+							"in_converting": true,
+							"origin_encoding": "GBK",
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 475.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 200,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								200,
+								200
+							]
+						],
+						"settings":
+						{
+							"auto_indent": false,
+							"encoding_helper_encoding": "",
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_width": 2,
+							"word_wrap": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "/D/Program Files/Sublime Text3/Data/Packages/User/CTags.sublime-settings",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"encoding_helper_encoding": "cp936",
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "/E/pro/yijiangbo/arm9/Logic_RT_/mainframe.ini",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 265,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								265,
+								265
+							]
+						],
+						"settings":
+						{
+							"encoding_helper_encoding": "cp936",
+							"origin_encoding": "ASCII",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 27.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 124.0
+	},
+	"project": "test.sublime-project",
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"D:\\Program Files\\Sublime Text3\\bbb\\bb.sublime-workspace"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 147.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

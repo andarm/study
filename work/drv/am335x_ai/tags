@@ -1,0 +1,191 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ABANDON_NUM	ai4.c	56;"	d	file:
+ADC_CLK	ai.h	118;"	d
+ADC_STPENB_STEPENB	ai.h	123;"	d
+AD_CH	ai4.c	55;"	d	file:
+AD_MAJOR	ai4.c	51;"	d	file:
+AD_MINOR	ai4.c	52;"	d	file:
+AD_TEMP_NUM	ai4.c	54;"	d	file:
+BAK_30_44	ai4.c	45;"	d	file:
+BAK_45_82	ai4.c	46;"	d	file:
+BAK_ADC_1	ai4.c	42;"	d	file:
+BAK_ADC_2	ai4.c	43;"	d	file:
+BAK_ADC_3	ai4.c	44;"	d	file:
+DEVICE_NAME	test_ai.c	10;"	d	file:
+FIFO1_THRESHOLD	ai.h	121;"	d
+KERNELDIR	Makefile	/^KERNELDIR 	?=  \/home\/saftop\/rt\/linux-3.2$/;"	m
+LPST_AD_DRV	ai4.c	/^}ST_AD_DRV, *LPST_AD_DRV;$/;"	t	typeref:struct:__anon1	file:
+PWD	Makefile	/^PWD			:= $(shell pwd)$/;"	m
+ST_AD_DRV	ai4.c	/^}ST_AD_DRV, *LPST_AD_DRV;$/;"	t	typeref:struct:__anon1	file:
+TOTAL_CHANNELS	ai.h	120;"	d
+TOTAL_STEPS	ai.h	119;"	d
+TSCADC_CHARGEDLY_OPEN	ai.h	96;"	d
+TSCADC_CHARGEDLY_OPENDLY	ai.h	97;"	d
+TSCADC_CHARGEDLY_OPEN_MASK	ai.h	95;"	d
+TSCADC_CNTRLREG_4WIRE	ai.h	106;"	d
+TSCADC_CNTRLREG_5WIRE	ai.h	107;"	d
+TSCADC_CNTRLREG_8WIRE	ai.h	108;"	d
+TSCADC_CNTRLREG_AFE_CTRL	ai.h	105;"	d
+TSCADC_CNTRLREG_AFE_CTRL_MASK	ai.h	104;"	d
+TSCADC_CNTRLREG_POWERDOWN	ai.h	103;"	d
+TSCADC_CNTRLREG_STEPCONFIGWRT	ai.h	102;"	d
+TSCADC_CNTRLREG_STEPID	ai.h	101;"	d
+TSCADC_CNTRLREG_TSCENB	ai.h	109;"	d
+TSCADC_CNTRLREG_TSCSSENB	ai.h	100;"	d
+TSCADC_ENB	ai.h	35;"	d
+TSCADC_FIFOREAD_CHNLID_MASK	ai.h	113;"	d
+TSCADC_FIFOREAD_DATA_MASK	ai.h	112;"	d
+TSCADC_IRQENB_FIFO0OVRRUN	ai.h	40;"	d
+TSCADC_IRQENB_FIFO0THRES	ai.h	39;"	d
+TSCADC_IRQENB_FIFO0UNDRFLW	ai.h	41;"	d
+TSCADC_IRQENB_FIFO1OVRRUN	ai.h	43;"	d
+TSCADC_IRQENB_FIFO1THRES	ai.h	42;"	d
+TSCADC_IRQENB_FIFO1UNDRFLW	ai.h	44;"	d
+TSCADC_IRQENB_HW_PEN	ai.h	38;"	d
+TSCADC_IRQENB_PENUP	ai.h	45;"	d
+TSCADC_IRQWKUP_ENB	ai.h	28;"	d
+TSCADC_REG_ADCFSM	ai.h	10;"	d
+TSCADC_REG_CHARGECONFIG	ai.h	14;"	d
+TSCADC_REG_CHARGEDELAY	ai.h	15;"	d
+TSCADC_REG_CLKDIV	ai.h	11;"	d
+TSCADC_REG_CTRL	ai.h	9;"	d
+TSCADC_REG_FIFO0	ai.h	23;"	d
+TSCADC_REG_FIFO0CNT	ai.h	18;"	d
+TSCADC_REG_FIFO0THR	ai.h	19;"	d
+TSCADC_REG_FIFO1	ai.h	24;"	d
+TSCADC_REG_FIFO1CNT	ai.h	20;"	d
+TSCADC_REG_FIFO1THR	ai.h	21;"	d
+TSCADC_REG_IDLECONFIG	ai.h	13;"	d
+TSCADC_REG_IRQCLR	ai.h	7;"	d
+TSCADC_REG_IRQENABLE	ai.h	6;"	d
+TSCADC_REG_IRQEOI	ai.h	149;"	d
+TSCADC_REG_IRQSTATUS	ai.h	5;"	d
+TSCADC_REG_IRQWAKEUP	ai.h	8;"	d
+TSCADC_REG_RAWIRQSTATUS	ai.h	4;"	d
+TSCADC_REG_SE	ai.h	12;"	d
+TSCADC_REG_STEPCONFIG	ai.h	16;"	d
+TSCADC_REG_STEPDELAY	ai.h	17;"	d
+TSCADC_SEQ_STATUS	ai.h	116;"	d
+TSCADC_STEPCHARGE_INM	ai.h	85;"	d
+TSCADC_STEPCHARGE_INM_AN1	ai.h	86;"	d
+TSCADC_STEPCHARGE_INM_MASK	ai.h	84;"	d
+TSCADC_STEPCHARGE_INP	ai.h	88;"	d
+TSCADC_STEPCHARGE_INP_AN1	ai.h	89;"	d
+TSCADC_STEPCHARGE_INP_MASK	ai.h	87;"	d
+TSCADC_STEPCHARGE_RFM	ai.h	91;"	d
+TSCADC_STEPCHARGE_RFM_MASK	ai.h	90;"	d
+TSCADC_STEPCHARGE_RFM_XNUR	ai.h	92;"	d
+TSCADC_STEPCHARGE_RFP	ai.h	82;"	d
+TSCADC_STEPCHARGE_RFP_MASK	ai.h	81;"	d
+TSCADC_STEPCHARGE_RFP_XPUL	ai.h	83;"	d
+TSCADC_STEPCONFIG_1_INP	ai.h	126;"	d
+TSCADC_STEPCONFIG_1_NEGATIVE_INP	ai.h	125;"	d
+TSCADC_STEPCONFIG_2_INP	ai.h	127;"	d
+TSCADC_STEPCONFIG_3_INP	ai.h	128;"	d
+TSCADC_STEPCONFIG_4_INP	ai.h	129;"	d
+TSCADC_STEPCONFIG_5_INP	ai.h	130;"	d
+TSCADC_STEPCONFIG_6_INP	ai.h	131;"	d
+TSCADC_STEPCONFIG_7_INP	ai.h	132;"	d
+TSCADC_STEPCONFIG_8_INP	ai.h	133;"	d
+TSCADC_STEPCONFIG_AVG	ai.h	53;"	d
+TSCADC_STEPCONFIG_AVG_16	ai.h	54;"	d
+TSCADC_STEPCONFIG_AVG_MASK	ai.h	52;"	d
+TSCADC_STEPCONFIG_FIFO1	ai.h	144;"	d
+TSCADC_STEPCONFIG_FIFO1	ai.h	70;"	d
+TSCADC_STEPCONFIG_IDLE_INP	ai.h	145;"	d
+TSCADC_STEPCONFIG_INM	ai.h	140;"	d
+TSCADC_STEPCONFIG_INM	ai.h	62;"	d
+TSCADC_STEPCONFIG_INM_ADCREFM	ai.h	63;"	d
+TSCADC_STEPCONFIG_INM_MASK	ai.h	61;"	d
+TSCADC_STEPCONFIG_INP	ai.h	65;"	d
+TSCADC_STEPCONFIG_INP_ADCREFM	ai.h	69;"	d
+TSCADC_STEPCONFIG_INP_AN2	ai.h	66;"	d
+TSCADC_STEPCONFIG_INP_AN3	ai.h	67;"	d
+TSCADC_STEPCONFIG_INP_AN4	ai.h	68;"	d
+TSCADC_STEPCONFIG_INP_MASK	ai.h	64;"	d
+TSCADC_STEPCONFIG_MODE	ai.h	138;"	d
+TSCADC_STEPCONFIG_MODE	ai.h	49;"	d
+TSCADC_STEPCONFIG_MODE_HWSYNC	ai.h	50;"	d
+TSCADC_STEPCONFIG_MODE_MASK	ai.h	48;"	d
+TSCADC_STEPCONFIG_MODE_SWCNT	ai.h	51;"	d
+TSCADC_STEPCONFIG_OPENDLY	ai.h	146;"	d
+TSCADC_STEPCONFIG_OPENDLY	ai.h	75;"	d
+TSCADC_STEPCONFIG_REFP	ai.h	134;"	d
+TSCADC_STEPCONFIG_RFM	ai.h	136;"	d
+TSCADC_STEPCONFIG_RFP	ai.h	139;"	d
+TSCADC_STEPCONFIG_SAMPLEDLY	ai.h	147;"	d
+TSCADC_STEPCONFIG_SAMPLEDLY	ai.h	78;"	d
+TSCADC_STEPCONFIG_SINGLE_ENDED_OPER_MODE	ai.h	137;"	d
+TSCADC_STEPCONFIG_XNN	ai.h	56;"	d
+TSCADC_STEPCONFIG_XNP	ai.h	59;"	d
+TSCADC_STEPCONFIG_XPP	ai.h	55;"	d
+TSCADC_STEPCONFIG_YNN	ai.h	58;"	d
+TSCADC_STEPCONFIG_YPN	ai.h	60;"	d
+TSCADC_STEPCONFIG_YPP	ai.h	57;"	d
+TSCADC_STEPDELAY_OPEN	ai.h	74;"	d
+TSCADC_STEPDELAY_OPEN_MASK	ai.h	73;"	d
+TSCADC_STEPDELAY_SAMPLE	ai.h	77;"	d
+TSCADC_STEPDELAY_SAMPLE_MASK	ai.h	76;"	d
+TSCADC_STEPENB	ai.h	32;"	d
+TSCADC_STEPENB_MASK	ai.h	31;"	d
+TSCADC_STPENB_STEPENB	ai.h	33;"	d
+TSCADC_STPENB_STEPENB_TC	ai.h	34;"	d
+_AI_H_	ai.h	2;"	d
+__this_module	ai4.mod.c	/^struct module __this_module$/;"	v	typeref:struct:module
+__used	ai4.mod.c	/^__used$/;"	v	file:
+__used	ai4.mod.c	/^__used$/;"	v	typeref:struct:____versions	file:
+ad_dev_name	ai4.c	/^static const char ad_dev_name[] = "am335x_adc";	\/\/ 注册的名称$/;"	v	file:
+ad_exit	ai4.c	/^module_exit(ad_exit);$/;"	v
+ad_exit	ai4.c	/^static void __exit ad_exit(void)$/;"	f	file:
+ad_filter	ai4.c	/^u16 ad_filter(u16 *data, u16 uc_Num, u16 filt_mod)$/;"	f
+ad_fops	ai4.c	/^static const struct file_operations ad_fops =$/;"	v	typeref:struct:file_operations	file:
+ad_init	ai4.c	/^module_init(ad_init);$/;"	v
+ad_init	ai4.c	/^static int __init ad_init(void)$/;"	f	file:
+ad_major	ai4.c	/^static int ad_major 		= AD_MAJOR;	\/\/主设备号$/;"	v	file:
+ad_minor	ai4.c	/^static int ad_minor 		= AD_MINOR;	\/\/次设备号$/;"	v	file:
+ad_nr_devs	ai4.c	/^static int ad_nr_devs		= 1;		\/\/ 字符设备的个数$/;"	v	file:
+ad_open	ai4.c	/^static int ad_open(struct inode *inode, struct file *filp)$/;"	f	file:
+ad_read	ai4.c	/^static ssize_t ad_read(struct file *filp, char __user *buf, size_t size, loff_t *ppos)$/;"	f	file:
+ad_release	ai4.c	/^static int ad_release(struct inode *inode, struct file *filp)$/;"	f	file:
+ad_setup_reg	ai4.c	/^static int ad_setup_reg(void)$/;"	f	file:
+adc_calc_handle	ai4.c	/^static void adc_calc_handle(struct work_struct *work)$/;"	f	file:
+adc_calc_work	ai4.c	/^    struct work_struct adc_calc_work;$/;"	m	struct:__anon1	typeref:struct:__anon1::work_struct	file:
+adc_data	ai4.c	/^static int adc_data=0;$/;"	v	file:
+adc_interrupt	ai4.c	/^static irqreturn_t adc_interrupt(int irq, void *dev)$/;"	f	file:
+adc_step_config	ai4.c	/^static void adc_step_config(struct tscadc *adc_dev)$/;"	f	file:
+ai_data	ai4.c	/^    u16 ai_data[AD_CH];					        \/\/ 2路采集通道数据$/;"	m	struct:__anon1	file:
+calc_result	ai4.c	/^static char calc_result(u16 *p_AI_val,int ch)$/;"	f	file:
+cdev	ai4.c	/^    struct cdev cdev;		\/\/ 字符设备结构体$/;"	m	struct:__anon1	typeref:struct:__anon1::cdev	file:
+ch_index	ai4.c	/^    u16 ch_index;$/;"	m	struct:__anon1	file:
+ch_temp_pt	ai4.c	/^    u16 ch_temp_pt;$/;"	m	struct:__anon1	file:
+channel	ai4.c	/^static int channel = 0 ;$/;"	v	file:
+cls	ai4.c	/^    struct class *cls;$/;"	m	struct:__anon1	typeref:struct:__anon1::class	file:
+dev	ai4.c	/^    struct device *dev;$/;"	m	struct:__anon1	typeref:struct:__anon1::device	file:
+ev_adc	ai4.c	/^static volatile int ev_adc = 0;$/;"	v	file:
+irq	ai4.c	/^        int         irq;$/;"	m	struct:tscadc	file:
+is_allow_read	ai4.c	/^    u16 is_allow_read;					        \/\/ 是否允许读取$/;"	m	struct:__anon1	file:
+lin_test	ai4.c	680;"	d	file:
+main	test_ai.c	/^int main(int argc, char * argv[])$/;"	f
+obj-m	Makefile	/^obj-m := ai4.o$/;"	m
+pr_debug	ai.h	153;"	d
+pr_debug	ai.h	155;"	d
+pst_ad_drv	ai4.c	/^ST_AD_DRV *pst_ad_drv = NULL;$/;"	v
+read_ad_val	ai4.c	/^static int read_ad_val(u16 ch)$/;"	f	file:
+rw_sem	ai4.c	/^    struct rw_semaphore rw_sem;$/;"	m	struct:__anon1	typeref:struct:__anon1::rw_semaphore	file:
+start_adc	ai4.c	/^static void start_adc(struct tscadc *dev)$/;"	f	file:
+stop_adc	ai4.c	/^static void stop_adc(struct tscadc *dev)$/;"	f	file:
+temp0_ai_data	ai4.c	/^    u16 temp0_ai_data[AD_TEMP_NUM];			    \/\/ 采集缓冲buff$/;"	m	struct:__anon1	file:
+temp1_ai_data	ai4.c	/^    u16 temp1_ai_data[AD_TEMP_NUM];$/;"	m	struct:__anon1	file:
+timer	ai4.c	/^    struct timer_list timer;$/;"	m	struct:__anon1	typeref:struct:__anon1::timer_list	file:
+timer_handler	ai4.c	/^static void timer_handler(unsigned long data)$/;"	f	file:
+ts_dev	ai4.c	/^struct tscadc *ts_dev =NULL;$/;"	v	typeref:struct:tscadc
+tsc_base	ai4.c	/^    void __iomem		*tsc_base;$/;"	m	struct:tscadc	file:
+tsc_idle_config	ai4.c	/^static void tsc_idle_config(struct tscadc *ts_config)$/;"	f	file:
+tscadc	ai4.c	/^struct tscadc {$/;"	s	file:
+tscadc_readl	ai4.c	/^static unsigned int tscadc_readl(struct tscadc *ts, unsigned int reg)$/;"	f	file:
+tscadc_writel	ai4.c	/^static void tscadc_writel(struct tscadc *tsc, unsigned int reg,unsigned int val)$/;"	f	file:

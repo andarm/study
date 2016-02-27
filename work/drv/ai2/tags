@@ -1,0 +1,118 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ADC_CLK	ti_adc_driver.c	113;"	d	file:
+ADC_DEVICE	test_ai.c	4;"	d	file:
+ADC_STPENB_STEPENB	ti_adc_driver.c	62;"	d	file:
+KERNELDIR	Makefile	/^KERNELDIR 	?=  \/home\/saftop\/rt\/linux-3.2$/;"	m
+MAX_12BIT	ti_adc_driver.c	115;"	d	file:
+PWD	Makefile	/^PWD			:= $(shell pwd)$/;"	m
+TSCADC_ADCFSM_FSM	ti_adc_driver.c	111;"	d	file:
+TSCADC_ADCFSM_STEPID	ti_adc_driver.c	110;"	d	file:
+TSCADC_CNTRLREG_4WIRE	ti_adc_driver.c	107;"	d	file:
+TSCADC_CNTRLREG_5WIRE	ti_adc_driver.c	108;"	d	file:
+TSCADC_CNTRLREG_8WIRE	ti_adc_driver.c	109;"	d	file:
+TSCADC_CNTRLREG_STEPCONFIGWRT	ti_adc_driver.c	105;"	d	file:
+TSCADC_CNTRLREG_STEPID	ti_adc_driver.c	104;"	d	file:
+TSCADC_CNTRLREG_TSCENB	ti_adc_driver.c	106;"	d	file:
+TSCADC_CNTRLREG_TSCSSENB	ti_adc_driver.c	103;"	d	file:
+TSCADC_IRQENB_FIFO0THRES	ti_adc_driver.c	60;"	d	file:
+TSCADC_IRQENB_FIFO1THRES	ti_adc_driver.c	64;"	d	file:
+TSCADC_IRQENB_HW_PEN	ti_adc_driver.c	66;"	d	file:
+TSCADC_IRQENB_PENUP	ti_adc_driver.c	65;"	d	file:
+TSCADC_IRQENB_STEPEND	ti_adc_driver.c	63;"	d	file:
+TSCADC_IRQWKUP_DISABLE	ti_adc_driver.c	58;"	d	file:
+TSCADC_IRQWKUP_ENB	ti_adc_driver.c	57;"	d	file:
+TSCADC_REG_ADCFSM	ti_adc_driver.c	36;"	d	file:
+TSCADC_REG_CHARGECONFIG	ti_adc_driver.c	40;"	d	file:
+TSCADC_REG_CHARGEDELAY	ti_adc_driver.c	41;"	d	file:
+TSCADC_REG_CLKDIV	ti_adc_driver.c	37;"	d	file:
+TSCADC_REG_CTRL	ti_adc_driver.c	35;"	d	file:
+TSCADC_REG_FIFO0	ti_adc_driver.c	52;"	d	file:
+TSCADC_REG_FIFO0CNT	ti_adc_driver.c	48;"	d	file:
+TSCADC_REG_FIFO0THR	ti_adc_driver.c	49;"	d	file:
+TSCADC_REG_FIFO1	ti_adc_driver.c	53;"	d	file:
+TSCADC_REG_FIFO1CNT	ti_adc_driver.c	50;"	d	file:
+TSCADC_REG_FIFO1THR	ti_adc_driver.c	51;"	d	file:
+TSCADC_REG_IDLECONFIG	ti_adc_driver.c	39;"	d	file:
+TSCADC_REG_IRQCLR	ti_adc_driver.c	33;"	d	file:
+TSCADC_REG_IRQENABLE	ti_adc_driver.c	32;"	d	file:
+TSCADC_REG_IRQEOI	ti_adc_driver.c	29;"	d	file:
+TSCADC_REG_IRQSTATUS	ti_adc_driver.c	31;"	d	file:
+TSCADC_REG_IRQWAKEUP	ti_adc_driver.c	34;"	d	file:
+TSCADC_REG_RAWIRQSTATUS	ti_adc_driver.c	30;"	d	file:
+TSCADC_REG_SE	ti_adc_driver.c	38;"	d	file:
+TSCADC_REG_STEPCONFIG	ti_adc_driver.c	42;"	d	file:
+TSCADC_REG_STEPCONFIG13	ti_adc_driver.c	44;"	d	file:
+TSCADC_REG_STEPCONFIG14	ti_adc_driver.c	46;"	d	file:
+TSCADC_REG_STEPDELAY	ti_adc_driver.c	43;"	d	file:
+TSCADC_REG_STEPDELAY13	ti_adc_driver.c	45;"	d	file:
+TSCADC_REG_STEPDELAY14	ti_adc_driver.c	47;"	d	file:
+TSCADC_STEPCONFIG_1_INP	ti_adc_driver.c	77;"	d	file:
+TSCADC_STEPCONFIG_1_NEGATIVE_INP	ti_adc_driver.c	76;"	d	file:
+TSCADC_STEPCONFIG_2SAMPLES_AVG	ti_adc_driver.c	68;"	d	file:
+TSCADC_STEPCONFIG_2_INP	ti_adc_driver.c	78;"	d	file:
+TSCADC_STEPCONFIG_3_INP	ti_adc_driver.c	79;"	d	file:
+TSCADC_STEPCONFIG_4_INP	ti_adc_driver.c	80;"	d	file:
+TSCADC_STEPCONFIG_5_INP	ti_adc_driver.c	81;"	d	file:
+TSCADC_STEPCONFIG_6_INP	ti_adc_driver.c	82;"	d	file:
+TSCADC_STEPCONFIG_7_INP	ti_adc_driver.c	83;"	d	file:
+TSCADC_STEPCONFIG_8_INP	ti_adc_driver.c	84;"	d	file:
+TSCADC_STEPCONFIG_FIFO1	ti_adc_driver.c	95;"	d	file:
+TSCADC_STEPCONFIG_IDLE_INP	ti_adc_driver.c	96;"	d	file:
+TSCADC_STEPCONFIG_INM	ti_adc_driver.c	91;"	d	file:
+TSCADC_STEPCONFIG_INP	ti_adc_driver.c	93;"	d	file:
+TSCADC_STEPCONFIG_INP_4	ti_adc_driver.c	92;"	d	file:
+TSCADC_STEPCONFIG_INP_5	ti_adc_driver.c	94;"	d	file:
+TSCADC_STEPCONFIG_MODE	ti_adc_driver.c	89;"	d	file:
+TSCADC_STEPCONFIG_MODE_HWSYNC	ti_adc_driver.c	67;"	d	file:
+TSCADC_STEPCONFIG_OPENDLY	ti_adc_driver.c	97;"	d	file:
+TSCADC_STEPCONFIG_REFP	ti_adc_driver.c	85;"	d	file:
+TSCADC_STEPCONFIG_RFM	ti_adc_driver.c	87;"	d	file:
+TSCADC_STEPCONFIG_RFP	ti_adc_driver.c	90;"	d	file:
+TSCADC_STEPCONFIG_SAMPLEDLY	ti_adc_driver.c	98;"	d	file:
+TSCADC_STEPCONFIG_SINGLE_ENDED_OPER_MODE	ti_adc_driver.c	88;"	d	file:
+TSCADC_STEPCONFIG_XNN	ti_adc_driver.c	70;"	d	file:
+TSCADC_STEPCONFIG_XNP	ti_adc_driver.c	73;"	d	file:
+TSCADC_STEPCONFIG_XPP	ti_adc_driver.c	69;"	d	file:
+TSCADC_STEPCONFIG_YNN	ti_adc_driver.c	72;"	d	file:
+TSCADC_STEPCONFIG_YPN	ti_adc_driver.c	74;"	d	file:
+TSCADC_STEPCONFIG_YPP	ti_adc_driver.c	71;"	d	file:
+TSCADC_STEPCONFIG_Z1	ti_adc_driver.c	101;"	d	file:
+TSCADC_STPENB_STEPENB	ti_adc_driver.c	59;"	d	file:
+__this_module	ti_adc_driver.mod.c	/^struct module __this_module$/;"	v	typeref:struct:module
+__used	ti_adc_driver.mod.c	/^__used$/;"	v	file:
+__used	ti_adc_driver.mod.c	/^__used$/;"	v	typeref:struct:____versions	file:
+adc	ti_adc_driver.c	/^	struct cdev	adc;   $/;"	m	struct:adc_st	typeref:struct:adc_st::cdev	file:
+adc_base	ti_adc_driver.c	/^	void __iomem		*adc_base;    $/;"	m	struct:adc_st	file:
+adc_data	ti_adc_driver.c	/^static int adc_data=0;$/;"	v	file:
+adc_dev	ti_adc_driver.c	/^struct adc_st			*adc_dev = NULL;$/;"	v	typeref:struct:adc_st
+adc_fops	ti_adc_driver.c	/^static struct file_operations adc_fops = $/;"	v	typeref:struct:file_operations	file:
+adc_idle_config	ti_adc_driver.c	/^static void adc_idle_config(struct adc_st *adc_config)$/;"	f	file:
+adc_interrupt	ti_adc_driver.c	/^static irqreturn_t adc_interrupt(int irq, void *dev)$/;"	f	file:
+adc_major	ti_adc_driver.c	/^static int adc_major = 0;$/;"	v	file:
+adc_open	ti_adc_driver.c	/^static int adc_open(struct inode *inode, struct file *file)$/;"	f	file:
+adc_probe	ti_adc_driver.c	/^static	int __devinit adc_probe(struct platform_device *pdev)$/;"	f	file:
+adc_read	ti_adc_driver.c	/^static ssize_t adc_read(struct file *filp, char *buffer, size_t count, loff_t *ppos)$/;"	f	file:
+adc_readl	ti_adc_driver.c	/^static unsigned int adc_readl(struct adc_st *adc, unsigned int reg)$/;"	f	file:
+adc_release	ti_adc_driver.c	/^static int adc_release(struct inode *inode, struct file *filp)$/;"	f	file:
+adc_remove	ti_adc_driver.c	/^static int __devexit adc_remove(struct platform_device *pdev)$/;"	f	file:
+adc_setup_cdev	ti_adc_driver.c	/^static int adc_setup_cdev(struct adc_st *dev, int index)$/;"	f	file:
+adc_st	ti_adc_driver.c	/^struct adc_st {$/;"	s	file:
+adc_step_config	ti_adc_driver.c	/^static void adc_step_config(struct adc_st *adc_dev)$/;"	f	file:
+adc_writel	ti_adc_driver.c	/^static void adc_writel(struct adc_st *adc , unsigned int reg,$/;"	f	file:
+channel	ti_adc_driver.c	/^static int channel = 4;$/;"	v	file:
+ev_adc	ti_adc_driver.c	/^static volatile int ev_adc = 0;$/;"	v	file:
+irq	ti_adc_driver.c	/^	int			irq;$/;"	m	struct:adc_st	file:
+main	test_ai.c	/^int main() $/;"	f
+obj-m	Makefile	/^obj-m := ti_adc_driver.o$/;"	m
+start_adc	ti_adc_driver.c	/^static void start_adc(struct adc_st *dev)$/;"	f	file:
+stop_adc	ti_adc_driver.c	/^static void stop_adc(struct adc_st *dev)$/;"	f	file:
+ti_adc_driver	ti_adc_driver.c	/^static struct platform_driver ti_adc_driver = {$/;"	v	typeref:struct:platform_driver	file:
+ti_adc_exit	ti_adc_driver.c	/^module_exit(ti_adc_exit);$/;"	v
+ti_adc_exit	ti_adc_driver.c	/^static void __exit ti_adc_exit(void)$/;"	f	file:
+ti_adc_init	ti_adc_driver.c	/^module_init(ti_adc_init);$/;"	v
+ti_adc_init	ti_adc_driver.c	/^static int __init ti_adc_init(void)$/;"	f	file:

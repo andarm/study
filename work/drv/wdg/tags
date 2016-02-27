@@ -1,0 +1,75 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+DEVICE_NAME	test_do.c	10;"	d	file:
+DO_CH	do.c	40;"	d	file:
+DO_MAJOR	do.c	37;"	d	file:
+DO_MINOR	do.c	38;"	d	file:
+GPIO_DO	do.c	/^u32 GPIO_DO[]={GPIO_DO_0};$/;"	v
+GPIO_DO_0	do.c	42;"	d	file:
+GPIO_TO_PIN	do.c	27;"	d	file:
+GPIO_WDG	do.c	46;"	d	file:
+KERNELDIR	Makefile	/^KERNELDIR 	?=  \/home\/saftop\/rt\/linux-3.2$/;"	m
+LPST_DO_DEV	do.c	/^} ST_DO_DEV, *LPST_DO_DEV;$/;"	t	typeref:struct:__anon4	file:
+LPST_DO_DRV	do.c	/^} ST_DO_DRV, *LPST_DO_DRV;$/;"	t	typeref:struct:__anon5	file:
+LPST_S3C_DO_CFG	do.h	/^	} ST_S3C_DO_CFG, *LPST_S3C_DO_CFG;$/;"	t	typeref:struct:__anon2
+LPST_S3C_DO_CFG	do.h	/^	} ST_S3C_DO_CFG, *LPST_S3C_DO_CFG;$/;"	t	typeref:struct:__anon3
+LPST_S3C_DO_CFG	test_do.c	/^	} ST_S3C_DO_CFG, *LPST_S3C_DO_CFG;$/;"	t	typeref:struct:__anon1	file:
+PWD	Makefile	/^PWD			:= $(shell pwd)$/;"	m
+S3C_DO_NC	do.h	21;"	d
+S3C_DO_NC	test_do.c	18;"	d	file:
+S3C_DO_NO	do.h	22;"	d
+S3C_DO_NO	test_do.c	19;"	d	file:
+S3C_DO_PULSE_NC	do.h	23;"	d
+S3C_DO_PULSE_NC	test_do.c	20;"	d	file:
+S3C_DO_PULSE_NO	do.h	24;"	d
+S3C_DO_PULSE_NO	test_do.c	21;"	d	file:
+SIZE	test_do.c	15;"	d	file:
+ST_DO_DEV	do.c	/^} ST_DO_DEV, *LPST_DO_DEV;$/;"	t	typeref:struct:__anon4	file:
+ST_DO_DRV	do.c	/^} ST_DO_DRV, *LPST_DO_DRV;$/;"	t	typeref:struct:__anon5	file:
+ST_S3C_DO_CFG	do.h	/^	} ST_S3C_DO_CFG, *LPST_S3C_DO_CFG;$/;"	t	typeref:struct:__anon2
+ST_S3C_DO_CFG	do.h	/^	} ST_S3C_DO_CFG, *LPST_S3C_DO_CFG;$/;"	t	typeref:struct:__anon3
+ST_S3C_DO_CFG	test_do.c	/^	} ST_S3C_DO_CFG, *LPST_S3C_DO_CFG;$/;"	t	typeref:struct:__anon1	file:
+_S3C_DO_H_	do.h	2;"	d
+__this_module	do.mod.c	/^struct module __this_module$/;"	v	typeref:struct:module
+__used	do.mod.c	/^__used$/;"	v	file:
+__used	do.mod.c	/^__used$/;"	v	typeref:struct:____versions	file:
+am335x_do_exit	do.c	/^module_exit(am335x_do_exit);$/;"	v
+am335x_do_exit	do.c	/^static void __exit am335x_do_exit(void)$/;"	f	file:
+am335x_do_init	do.c	/^module_init(am335x_do_init);$/;"	v
+am335x_do_init	do.c	/^static int __init am335x_do_init(void)$/;"	f	file:
+cdev	do.c	/^	struct cdev cdev;		\/\/ 字符设备结构体$/;"	m	struct:__anon5	typeref:struct:__anon5::cdev	file:
+ch	do.c	/^	u32 ch;$/;"	m	struct:__anon4	file:
+ch	do.h	/^		__u32 ch;$/;"	m	struct:__anon3
+ch	do.h	/^		u32 ch;$/;"	m	struct:__anon2
+ch	test_do.c	/^		__u32 ch;$/;"	m	struct:__anon1	file:
+cls	do.c	/^	struct class *cls;$/;"	m	struct:__anon5	typeref:struct:__anon5::class	file:
+cmd	do.h	/^		__u32 cmd;$/;"	m	struct:__anon3
+cmd	do.h	/^		u32 cmd;$/;"	m	struct:__anon2
+cmd	test_do.c	/^		__u32 cmd;$/;"	m	struct:__anon1	file:
+dev	do.c	/^	struct device *dev;$/;"	m	struct:__anon5	typeref:struct:__anon5::device	file:
+doDev	do.c	/^	ST_DO_DEV doDev;$/;"	m	struct:__anon5	file:
+do_dev_name	do.c	/^static const char do_dev_name[] 	= "am335x_wdg";	\/\/ 注册的名称$/;"	v	file:
+do_fops	do.c	/^static const struct file_operations do_fops = $/;"	v	typeref:struct:file_operations	file:
+do_major	do.c	/^static int do_major 				        = DO_MAJOR;                      $/;"	v	file:
+do_minor	do.c	/^static int do_minor 				        = DO_MINOR;                      $/;"	v	file:
+do_nr_devs	do.c	/^static int do_nr_devs				      = 1;			      \/\/ 字符设备的个数      $/;"	v	file:
+do_open	do.c	/^static int do_open(struct inode *inode, struct file *filp)$/;"	f	file:
+do_release	do.c	/^static int do_release(struct inode *inode, struct file *filp)$/;"	f	file:
+do_setup_pin	do.c	/^static inline void do_setup_pin(void)$/;"	f	file:
+do_write	do.c	/^static ssize_t do_write(struct file *filp, const char __user *buf, size_t size, loff_t *ppos)$/;"	f	file:
+main	test_do.c	/^int main(int argc, char * argv[])$/;"	f
+obj-m	Makefile	/^obj-m := do.o$/;"	m
+pin_state	do.c	/^	u32 pin_state;$/;"	m	struct:__anon4	file:
+pst_do_drv	do.c	/^ST_DO_DRV *pst_do_drv  =  NULL;$/;"	v
+sem	do.c	/^	struct semaphore sem;	\/\/ 竞争访问用到的信号量$/;"	m	struct:__anon4	typeref:struct:__anon4::semaphore	file:
+time_10ms	do.h	/^		__u32 time_10ms;$/;"	m	struct:__anon3
+time_10ms	do.h	/^		u32 time_10ms;$/;"	m	struct:__anon2
+time_10ms	test_do.c	/^		__u32 time_10ms;$/;"	m	struct:__anon1	file:
+timer	do.c	/^	struct timer_list timer;$/;"	m	struct:__anon4	typeref:struct:__anon4::timer_list	file:
+timer_handler	do.c	/^static void timer_handler(unsigned long data)$/;"	f	file:
+u16	test_do.c	12;"	d	file:
+u8	test_do.c	13;"	d	file:

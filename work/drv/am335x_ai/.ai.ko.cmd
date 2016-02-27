@@ -1,0 +1,1 @@
+cmd_/home/saftop/rt/drv/am335x_ai/ai.ko := arm-none-linux-gnueabi-ld -EL -r  -T /home/saftop/rt/linux-3.2/scripts/module-common.lds --build-id  -o /home/saftop/rt/drv/am335x_ai/ai.ko /home/saftop/rt/drv/am335x_ai/ai.o /home/saftop/rt/drv/am335x_ai/ai.mod.o

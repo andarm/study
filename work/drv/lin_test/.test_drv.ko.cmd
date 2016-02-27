@@ -1,0 +1,1 @@
+cmd_/home/saftop/rt/drv/lin_test/test_drv.ko := arm-none-linux-gnueabi-ld -EL -r  -T /home/saftop/rt/linux-3.2/scripts/module-common.lds --build-id  -o /home/saftop/rt/drv/lin_test/test_drv.ko /home/saftop/rt/drv/lin_test/test_drv.o /home/saftop/rt/drv/lin_test/test_drv.mod.o
