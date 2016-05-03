@@ -1,0 +1,1 @@
+cmd_/home/git/study/work/drv/testdrv/test.ko := arm-none-linux-gnueabi-ld -EL -r  -T /home/saftop/rt/linux-3.2/scripts/module-common.lds --build-id  -o /home/git/study/work/drv/testdrv/test.ko /home/git/study/work/drv/testdrv/test.o /home/git/study/work/drv/testdrv/test.mod.o

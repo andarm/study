@@ -1,0 +1,1 @@
+cmd_/home/git/study/work/drv/rtc/sys_rtc.ko := arm-none-linux-gnueabi-ld -EL -r  -T /home/saftop/rt/linux-3.2/scripts/module-common.lds --build-id  -o /home/git/study/work/drv/rtc/sys_rtc.ko /home/git/study/work/drv/rtc/sys_rtc.o /home/git/study/work/drv/rtc/sys_rtc.mod.o
