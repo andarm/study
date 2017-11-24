@@ -1,0 +1,18 @@
+### 我的共享 
+
+[我的共享目录](file://m3114030693/share/)
+
+<html>
+<a href="file:///10.169.38.110/share/">网易主页</a> 
+</html>
+<p>
+@echo off  
+::关闭回显 
+::中文显示使用ANSI保存
+
+@echo "我的共享"
+start \\m3114030693\share
+:: 类似 sleep @choice /t 2 /d y /n >nul
+@echo "我的共享"
+@pause
+</p>
