@@ -1,0 +1,4 @@
+
+- exploer . 打开当前目录
+- exploer .. 打开上级目录
+- exploer  dirname 打开指定文件 
