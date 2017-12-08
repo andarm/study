@@ -1,0 +1,2 @@
+- c := exec.Command("cmd.exe", "/c", "start E:/pro/sh/myshare.bat")
+- 启动window相关文件的方法。 
