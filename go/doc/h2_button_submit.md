@@ -1,0 +1,2 @@
+- input 元素中button 和 submit 显示均为按钮，但在提交表单内容上是有区别的。 
+- submit 只要点击了，就立即触发表单，而button 类型需要通过onClick=“xxx”去提交表单。 
