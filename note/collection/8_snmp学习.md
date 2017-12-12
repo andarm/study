@@ -26,3 +26,7 @@ oid，这个要多说一下，这个呢，就是物件识别代码（Object Iden
 Iso  (1).org(3).dod(6).internet(1).private(4).transition(868).products(2).chassis(4).card(1).slotCps(2)-  
 .-cpsSlotSummary(1).cpsModuleTable(1).cpsModuleEntry(1).cpsModuleModel(3).3562.3 
 
+# linux 下相关命令的  
+- snmpget -v 1 -c public 10.169.86.113 .1.3.6.1.4.1.6302.2.1.2.1.0
+
+
