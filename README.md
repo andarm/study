@@ -1,9 +1,9 @@
-# study
-- base job
+### [study](.)
 - 1、所有学习都内容都放到这里
 - **包括go c/c++ qt 等** 
 # [note](./note)
 - 注意是学习笔记
+- ** 零散学习记录 **
 # [pro](./pro)
 - 项目相关
 # [work](./work) 
