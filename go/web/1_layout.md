@@ -43,7 +43,7 @@ $('.dropdown-toggle').dropdown();
 ``` 
     <div class="row">
         <div id="footer" class="col-xs-12 col-md-12 text-center">
-            <p class="help-block"> Copyright &copy; 2016 saftop.com</p>
+            <p class="help-block"> Copyright &copy; 2016 andarm.com</p>
         </div>
     </div>
 ``` 
