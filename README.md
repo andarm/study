@@ -19,10 +19,11 @@
 ### [tool](./tool)
 
  ** 值得分享的工具和收藏的工具 **
-- [shell](./shell) 
-- [vim工具配置相关](./vim72)
-- [vscode工具简单配置使用](./vscode)
-- [git工具](./git)
+- [1.shell](./shell) 
+- [2.vim工具配置相关](./vim72)
+- [3.vscode工具简单配置使用](./vscode)
+- [4.git工具](./tool/git/REAMDE.md)
+- [5.Makefile](./Makefile) 
 
 
 
