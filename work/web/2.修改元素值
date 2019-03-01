@@ -1,0 +1,12 @@
+# 
+## [目录](README.md)
+## 修改元素值 
+
+### selector.val() 
+
+  修改的是输入类型的元素 
+  
+### selector.html()  .text() 
+
+  修改元素内容 
+  
