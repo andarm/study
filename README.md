@@ -22,13 +22,13 @@
 ### [tool](./tool)
 
  **值得分享的工具和收藏的工具**
-- [1.shell](tool/shell/README.md) 
-- [2.vim工具配置相关](./vim72/README.md)
-- [3.vscode工具简单配置使用](tool/vscode/README.md)
-- [4.git工具](tool/git/README.md)
-- [5.Makefile](tool/Makefile/README.md) 
-- [6.控制台cmd、批处理](tool/mobaxterm/README.md) 非常好用的终端控制工具，linux、window 
-- [7.IAR开发常用](tool/iar/README.md)
+- [1.shell](tool/shell/) 
+- [2.vim工具配置相关](./vim72/)
+- [3.vscode工具简单配置使用](tool/vscode/)
+- [4.git工具](tool/git/)
+- [5.Makefile](tool/Makefile/) 
+- [6.控制台cmd、批处理](tool/mobaxterm/) 非常好用的终端控制工具，linux、window 
+- [7.IAR开发常用](tool/iar/)
 
 
 
