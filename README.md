@@ -2,12 +2,6 @@
 
 ## [目录](README.md)
 
-
-### [note](./note)
-
-- 注意是学习笔记
-- ** 零散学习记录 **
-
 ### [work](./work) 
 
 **关于工作中写的调试代码和调试工具代码，属于个人工具**
@@ -17,7 +11,8 @@
 - [python](python/)
 - [src](src/) 测试代码
 - [web](web/) 学习web笔记
-- [weixin](weixin/)
+- [weixin](weixin/) 微信开发学习
+- [window_driver(WDK)驱动开发](work/window_driver/)
 
 ### [tool](./tool)
 
@@ -30,7 +25,7 @@
 - [6.控制台cmd、批处理](tool/mobaxterm/) 非常好用的终端控制工具，linux、window 
 - [7.IAR开发常用](tool/iar/)
 - [8.adb](tool/adb/)
-
+- [9. 构建自己的博客](tool/gitbook)
 
 
 
