@@ -12,8 +12,8 @@
 - [python](pro/python/)
 - [test_src](pro/src/) 测试代码
 - [web](pro/web/) 学习web笔记
-- [weixin](pro/weixin/) 微信开发学习
-- [window_driver(pro/WDK)驱动开发](work/window_driver/README.md)
+- [weixin](pro/weixin/README.md) 微信开发学习
+- [window_driver驱动开发](pro/window_driver/README.md)
 
 ### [tool](./tool)
 
@@ -26,7 +26,7 @@
 - [6.控制台cmd、批处理](tool/mobaxterm/) 非常好用的终端控制工具，linux、window 
 - [7.IAR开发常用](tool/iar/)
 - [8.adb](tool/adb/)
-- [9. 构建自己的博客](tool/gitbook)
+- [9. 构建自己的博客](tool/gitbook/README.md)
 
 
 
