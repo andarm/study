@@ -11,7 +11,7 @@
 - [MCU](pro/MCU/README.md)
 - [python](pro/python/)
 - [test_src](pro/src/) 测试代码
-- [web](pro/web/) 学习web笔记
+- [web](pro/web/README.md) 学习web笔记
 - [weixin](pro/weixin/README.md) 微信开发学习
 - [window_driver驱动开发](pro/window_driver/README.md)
 
