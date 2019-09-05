@@ -14,11 +14,13 @@
 - [web](pro/web/README.md) 学习web笔记
 - [weixin](pro/weixin/README.md) 微信开发学习
 - [window_driver驱动开发](pro/window_driver/README.md)
+- [java](pro/java/README.md)
+- [android](pro/android/README.md)
 
 ### [tool](./tool)
 
  **值得分享的工具和收藏的工具**
-- [1.shell](tool/shell/) 
+- [1.shell](tool/shell/README.md) 
 - [2.vim工具配置相关](./vim72/README.md)
 - [3.vscode工具简单配置使用](tool/vscode/README.md)
 - [4.git工具](tool/git/)
@@ -27,7 +29,8 @@
 - [7.IAR开发常用](tool/iar/)
 - [8.adb](tool/adb/)
 - [9. 构建自己的博客](tool/gitbook/README.md)
-
+- [10.vs2017使用](tool/vs2017/README.md)
+- [11.bat 控制台命令](tool/bat/README.md)
 
 
 
